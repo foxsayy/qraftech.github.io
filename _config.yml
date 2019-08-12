@@ -1,13 +1,10 @@
-remote_theme : wowthemesnet/mediumish-theme-jekyll
-
 # Site
 name: "Qraft Technologies Tech Blog"
-title: "Qraft Tech Blog"
-description: "크래프트테크놀로지스의 기술 블로그입니다."
+title: "Qraft Technologies Tech Blog"
+description: "크래프트테크놀로지스의 블로그입니다."
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
-url: "https://qraftech.github.io"
-baseurl: ""
+baseurl: /mediumish-theme-jekyll
 google_analytics: 'UA-46278016-1'
 disqus: 'demowebsite'
 mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
@@ -25,21 +22,14 @@ authors:
     twitter: https://twitter.com/wowthemesnet
     description: "Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
   john:
-    name: John
-    display_name: John    
-    avatar: 'assets/images/avatar.png'
+    name: 노승환
+    display_name: 노승환
+    avatar: 'assets/images/roh.png'
     gravatar: b1cc14991db7a456fcd761680bbc8f81
     email: wowthemesnet@gmail.com
     web: https://www.wowthemes.net
     twitter: https://twitter.com/wowthemesnet
-    description: "This is the author box. Write a short description of the author here. You are currently previewing Mediumish demo, a Jekyll template compatible with Github pages."
-  노승환:
-    name: 노승환
-    display_name: 노승환
-    avatar: 
-    gravatar:
-    email: seunghwan.roh@qraftec.com
-    description: 크래프트테크놀로지스의 블로그를 만드는 중입니다.
+    description: "안녕하세요"
 
 # Plugins
 plugins:
@@ -48,7 +38,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-archives
-    
+
 # Archives
 jekyll-archives:
   enabled:
@@ -56,11 +46,11 @@ jekyll-archives:
   layout: archive
   permalinks:
     category: '/category/:name/'
-    
-# Pagination 
+
+# Pagination
 paginate: 6
 paginate_path: /page:num/
-    
+
 # Other
 markdown: kramdown
 
