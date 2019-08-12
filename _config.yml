@@ -14,6 +14,12 @@ permalink: /:title/
 
 # Authors
 authors:
+  Qraftec:
+    name: Qraftec
+    display_name: Qraftec
+    avatar: 'assets/images/logo.png'
+    email: qraftec@qraftec.com
+    description: "Artificial Intelligence"    
   권택민:
     name: 권택민
     display_name: 권택민
