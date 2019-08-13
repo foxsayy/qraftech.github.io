@@ -1,8 +1,8 @@
 # Site
-name: "Qraft Technologies"
-title: "Qraft Technologies Tech Blog"
-description: "크래프트테크놀로지스의 블로그입니다."
-logo: 'assets/images/logo.png'
+name: "Qraft Tech Blog"
+title: "Qraft Tech Blog"
+description: "Qraft technologies sample blog"
+logo: 'assets/images/logo.jpg'
 favicon: 'assets/images/favicon.jpg'
 url: "https://qraftech.github.io"
 baseurl: ""
