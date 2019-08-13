@@ -1,0 +1,646 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Chapter 4. Fundamentals of machine learning</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="460ab6f7-9bb3-43dc-9d81-723fe26b8436" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/solid_blue.png" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📝</span></div><h1 class="page-title">Chapter 4. Fundamentals of machine learning</h1></header><div class="page-body"><nav id="8e9a7536-c28e-40bc-991f-7f6158e2fb6c" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dfccbd58-8830-4df0-baaa-4351217e2a4d">1. Four branches of machine learning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3e169cf7-d9ff-45bd-9cc7-23bc2d3c6ada">1.1 지도 학습</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e4e72b34-a432-4075-ac1d-fe772160ee95">1.2 비지도 학습</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#893b88c8-d405-4e99-b044-0e88290014e0">1.3 자기 지도 학습</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bf2d19a6-9335-4541-b2f2-f7406300c7df">1.4 강화 학습</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5b03770c-8d74-4258-a987-a7d7c64c8752">2. Evaluating machine-learning models</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cde60a0a-1653-4797-ada6-5af0458e376d">2.1 훈련, 검증, 테스트 세트</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#707d2eeb-8e6d-410a-94d3-14bed551c9fe">2.1.1 단순 홀드아웃 검증</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8e41f08b-ac39-4af2-af53-b1be9cad90b4">2.2.2 K-겹 교차 검증</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5953ce8b-edff-4284-9c70-cb3ced9960d9">2.2.3 셔플링을 사용한 반복 K-겹 교차 검증</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5e289d76-a52b-4f9f-9cea-9eb3dccf19f3">2.2 기억해야 할 것</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b12ecb40-5163-4715-8fed-bee3a7c12d06">3. Data preprocessing, feature engineering, and feature learning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cb6ae141-220d-4da3-9b33-4a93c24a649f">3.1 신경망을 위한 데이터 전처리</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#04427bae-118f-4767-96fe-4a1e49045bc9">3.1.1 벡터화</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e10ffe83-a1f8-4e12-85b3-2ec566babd49">3.1.2 값 정규화</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2f273cde-66a9-4d61-bfb4-8b643e5dc749">3.1.3 누락된 값 다루기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c27ecce2-3f07-44fd-967e-36e69e025e62">3.2 특성 공학</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6e71c41c-c755-4d2d-a1c4-d64d30f8b0c4">4. Overfitting and underfitting</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cf97cca6-8fb8-4f1c-ac4c-6cf5bfd65ce5">4.1 네트워크 크기 축소</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#01c2e5f8-681f-4e4b-aecf-39c719875442">4.2 가중치 규제 추가</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2d54447a-0504-46cd-a5ce-80d69edfb5ca">4.3 드롭아웃 추가</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ca7f37ab-f0ac-4a2a-8fd4-33e0224cd017">5. The universal workflow of machine learning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c5ec5149-633e-494f-bd3c-35e27a245bdb">5.1 문제 정의와 데이터셋 수집(pass)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2a41a284-9a49-4a9b-b682-6be942058e53">5.2 성공 지표 선택</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#09793ef5-72db-421e-bd75-27bba2313547">5.3 평가 방법 선택</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ef1f4ec2-a853-4d91-b8fe-053d0e1a6010">5.4 데이터 준비(pass)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e46d6807-4dbf-48bc-9bf7-fdae68af4653">5.5 기본보다 나은 모델 훈련하기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f9775c3b-45af-4165-a052-314fb85b9f70">5.6 몸집 키우기: 과대적합 모델 구축(pass)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#10b842fa-df4a-42bd-9474-7d30e7b7b9f4">5.7 모델 규제와 하이퍼파라미터 튜닝(pass)</a></div></nav><h1 id="dfccbd58-8830-4df0-baaa-4351217e2a4d" class="">1. Four branches of machine learning</h1><h2 id="3e169cf7-d9ff-45bd-9cc7-23bc2d3c6ada" class="">1.1 지도 학습</h2><p id="17832b63-2751-4337-b328-543aeebb25db" class="">훈련 데이터의 입력과 타깃 사이에 있는 관계를 학습합니다.</p><h2 id="e4e72b34-a432-4075-ac1d-fe772160ee95" class="">1.2 비지도 학습</h2><p id="5a4ad989-1d7d-4c14-98f8-36b22b8db4ce" class="">타깃을 사용하지 않고 입력 데이터에 대한 흥미로운 변환을 찾습니다.
+차원 축소와 군집이 비지도 학습에서 잘 알려진 범주입니다.</p><h2 id="893b88c8-d405-4e99-b044-0e88290014e0" class="">1.3 자기 지도 학습</h2><p id="bbc5d843-5580-4faf-ae06-144404c78fe4" class="">지도 학습의 특별한 경우이지만 사람이 만든 레이블을 사용하지 않습니다.
+학습 과정에 사람이 개입하지 않는 지도 학습이라고 생각할 수 있습니다.
+오토인코더가 잘 알려진 예입니다. 여기에서 생성된 타깃은 수정하지 않은 원본 입력입니다. </p><h2 id="bf2d19a6-9335-4541-b2f2-f7406300c7df" class="">1.4 강화 학습</h2><p id="bc35674e-7de6-41ca-9593-ca5f2d6f3ff6" class="">구글 딥마인드가 아타리 게임 플레이를 학습하는데 성공적으로 적용하면서 관심을 받기 시작했습니다. </p><h1 id="5b03770c-8d74-4258-a987-a7d7c64c8752" class="">2. Evaluating machine-learning models</h1><h2 id="cde60a0a-1653-4797-ada6-5af0458e376d" class="">2.1 훈련, 검증, 테스트 세트</h2><h3 id="707d2eeb-8e6d-410a-94d3-14bed551c9fe" class="">2.1.1 단순 홀드아웃 검증</h3><figure id="f4c5775d-8c13-41b4-b1f2-dc6f7c64589a" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled.png"><img style="width:308px" src="Chapter 4 Fundamentals of machine learning/Untitled.png"/></a></figure><ul id="5caea54a-767d-48a0-b3f1-a8241e646f37" class="toggle"><li><details open=""><summary>홀드아웃 검증 구현 예</summary><pre id="b438cd2d-8c52-4a01-9d71-25671717ebcf" class="code"><code>num_validation_samples = 10000
+
+np.random.shuffle(data)
+
+validation_data = data[:num_validation_samples]
+data = data[num_validation_samples:]
+
+training_data = data[:]
+
+model = get_model()
+model.train(training_data)
+validation_score = model.evaluate(validation_data)
+
+# At this point you can tune your model,
+# retrain it, evaluate it, tune it again...
+
+model = get_model()
+model.train(np.concatenate([training_data,
+                            validation_data]))
+test_score = model.evaluate(test_data)</code></pre><p id="abd55f6a-c678-4d47-9913-ccbd3e5012e6" class="">데이터가 적을 때는 샘플이 너무 적어 주어진 전체 데이터를 통계적으로 대표하지 못할 수 있다는 단점이 있습니다.</p></details></li></ul><h3 id="8e41f08b-ac39-4af2-af53-b1be9cad90b4" class="">2.2.2 K-겹 교차 검증</h3><figure id="0fc1158d-21ab-471a-b14d-3d6900723149" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 1.png"><img style="width:564px" src="Chapter 4 Fundamentals of machine learning/Untitled 1.png"/></a></figure><p id="fbf706a9-75d3-4014-89df-875456795068" class="">데이터를 동일한 크기를 가진 K개 분할로 나눕니다.
+각 분할 i에 대해 남은 K-1 개의 분할로 모델을 훈련하고 분할 i에서 모델을 평가합니다. </p><ul id="e51015b3-92fd-4da8-aae7-5c59ff1f3982" class="toggle"><li><details open=""><summary>K-겹 교차 검증 구현 예</summary><pre id="d80ce097-9d19-47c9-b8f6-fbac351799aa" class="code"><code>k = 4
+num_validation_samples = len(data) // k
+
+np.random.shuffle(data)
+
+validation_scores = []
+for fold in range(k):
+    validation_data = data[num_validation_samples * fold:num_validation_samples * (fold + 1)]
+    training_data = data[:num_validation_samples * fold] + data[num_validation_samples * (fold + 1):]
+    model = get_model()
+    model.train(training_data)
+    validation_score = model.evaluate(validation_data)
+    validation_scores.append(validation_score)
+
+validation_score = np.average(validation_scores)
+
+model = get_model()
+model.train(data)
+test_score = model.evaluate(test_data)</code></pre></details></li></ul><h3 id="5953ce8b-edff-4284-9c70-cb3ced9960d9" class="">2.2.3 셔플링을 사용한 반복 K-겹 교차 검증</h3><p id="286e37dc-544b-43fb-b082-262e3241acb8" class="">가용 데이터가 적고 가능한 정확하게 모델을 평가하고자 할 때 사용합니다. 
+P(반복 횟수) x K개의 모델을 훈련하고 평가하므로 비용이 많이 듭니다.</p><h2 id="5e289d76-a52b-4f9f-9cea-9eb3dccf19f3" class="">2.2 기억해야 할 것</h2><ul id="56d53123-5fa3-49a0-897f-99d797f9c6cb" class="bulleted-list"><li>대표성 있는 데이터</li></ul><ul id="2578c952-668e-41fa-b95c-907f9875d26d" class="bulleted-list"><li>시간의 방향</li></ul><ul id="968e9ff7-e2ae-43c7-8e91-6523aae82535" class="bulleted-list"><li>데이터 중복</li></ul><h1 id="b12ecb40-5163-4715-8fed-bee3a7c12d06" class="">3. Data preprocessing, feature engineering, and feature learning</h1><h2 id="cb6ae141-220d-4da3-9b33-4a93c24a649f" class="">3.1 신경망을 위한 데이터 전처리</h2><p id="a51697c3-cc29-4bba-928a-41e478125bd2" class="">원본 데이터를 신경망에 적용하기 쉽도록 만듭니다.</p><h3 id="04427bae-118f-4767-96fe-4a1e49045bc9" class="">3.1.1 벡터화</h3><p id="826085d3-223e-4ddd-b527-48c77b193373" class="">모든 입력과 타깃은 부동 소수 데이터로 이루어진 텐서여야 합니다. </p><h3 id="e10ffe83-a1f8-4e12-85b3-2ec566babd49" class="">3.1.2 값 정규화</h3><p id="7a6a97ce-58cc-480a-abd5-d3c8ec5675be" class="">비교적 큰 값이나 균일하지 않은 데이터를 신경망에 주입하는 것은 위험합니다.
+업데이트할 그래디언트가 커져 네트워크가 수렴하는 것을 방해합니다.</p><ul id="e56435c9-7702-4b26-8552-76237417b330" class="toggle"><li><details open=""><summary>네트워크를 쉽게 학습시키려면</summary><ul id="d3f0146f-a843-4756-b2bd-0d64fb42edb4" class="bulleted-list"><li>작은 값을 취합니다. 일반적으로 대부분의 값이 0~1 사이여야 합니다.</li></ul><ul id="3dce2205-1efb-4509-932d-86d0d9d4df86" class="bulleted-list"><li>균일해야 합니다. 즉 모든 특성이 대체로 비슷한 범위를 가져야 합니다.</li></ul></details></li></ul><ul id="53fd2a5d-b2be-4d3d-b92c-557038b527e2" class="toggle"><li><details open=""><summary>자주 사용되는 정규화</summary><ul id="421ba640-24e2-4250-a06b-3feb61242135" class="bulleted-list"><li>각 특성별로 평균이 0이 되도록 합니다. <code>x -= x.mean(axis=0)</code></li></ul><ul id="b1d0d041-0454-4f0e-8d69-537238ce675e" class="bulleted-list"><li>각 특성별로 표준편차가 1이 되도록 합니다. <code>x /= x.std(axis=0)</code></li></ul></details></li></ul><h3 id="2f273cde-66a9-4d61-bfb4-8b643e5dc749" class="">3.1.3 누락된 값 다루기</h3><p id="9cba5ed4-7d61-445d-bd19-9653a75a7668" class="">신경망에서 0이 사전에 정의된 의미 있는 값이 아니라면 누락값을 0으로 입력해도 괜찮습니다.
+네트워크가 0이 누락된 데이터를 의미한다는 것을 학습하면 이 값을 무시하기 시작합니다.
+테스트셋에 누락값이 있는데 네트워크가 누락값이 없는 데이터에서 훈련되었다면 누락값이 있는 훈련 샘플을 고의적으로 만들어야 합니다.</p><h2 id="c27ecce2-3f07-44fd-967e-36e69e025e62" class="">3.2 특성 공학</h2><p id="ed0b7e23-fd38-451a-a132-1d7db864cd5f" class="">데이터와 신경망에 관한 지식을 사용하는 단계입니다.</p><h1 id="6e71c41c-c755-4d2d-a1c4-d64d30f8b0c4" class="">4. Overfitting and underfitting</h1><p id="fbcaf1c6-ffcf-4516-99cf-63b5872e42d2" class="">과소적합: 훈련 데이터의 손실이 낮아질수록 테스트 데이터의 손실도 낮아지는 상황
+과대적합: 검증세트의 성능이 멈추고 감소하기 시작하는 상황</p><h2 id="cf97cca6-8fb8-4f1c-ac4c-6cf5bfd65ce5" class="">4.1 네트워크 크기 축소</h2><ul id="3709e0f1-8587-435f-bb0b-25b89d260afd" class="toggle"><li><details open=""><summary>영화 리뷰 분류 모델</summary><pre id="ea0733a6-f4e8-4cc7-a439-0531f042b6ec" class="code"><code>from keras import models
+from keras import layers
+
+model = models.Sequential()
+model.add(layers.Dense(16, activation=&#x27;relu&#x27;, input_shape=(10000,)))
+model.add(layers.Dense(16, activation=&#x27;relu&#x27;))
+model.add(layers.Dense(1, activation=&#x27;sigmoid&#x27;))</code></pre></details></li></ul><ul id="7c8e7af8-1eec-4224-b357-f70c7cb6cceb" class="toggle"><li><details open=""><summary>작은 용량의 모델과 검증 손실 차이</summary><pre id="b4d28655-1463-452f-a46f-3be5feb45f26" class="code"><code>model = models.Sequential()
+model.add(layers.Dense(6, activation=&#x27;relu&#x27;, input_shape=(10000,)))
+model.add(layers.Dense(6, activation=&#x27;relu&#x27;))
+model.add(layers.Dense(1, activation=&#x27;sigmoid&#x27;))</code></pre><figure id="c697fd1a-d62e-4137-887b-fc8c13829719" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 2.png"><img style="width:336px" src="Chapter 4 Fundamentals of machine learning/Untitled 2.png"/></a></figure><p id="cf92cfae-30ed-4116-af4c-9c2759b90c33" class="">작은 네트워크가 더 나중에 과대적합되기 시작합니다. (4번째가 아닌 6번째 에포크에서)
+과대적합이 시작되었을때 성능이 더 천천히 감소합니다.</p></details></li></ul><ul id="fa1855b7-7662-481f-9dfc-e3b3d9b2d102" class="toggle"><li><details open=""><summary>큰 용량의 모델과 검증 손실 차이</summary><pre id="9bac1b1b-4f9e-40b2-a111-045e34110251" class="code"><code>model = models.Sequential()
+model.add(layers.Dense(1024, activation=&#x27;relu&#x27;, input_shape=(10000,)))
+model.add(layers.Dense(1024, activation=&#x27;relu&#x27;))
+model.add(layers.Dense(1, activation=&#x27;sigmoid&#x27;))</code></pre><figure id="a158b626-8fa6-4104-a5bd-77e48ebf8345" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 3.png"><img style="width:420px" src="Chapter 4 Fundamentals of machine learning/Untitled 3.png"/></a></figure><p id="99b79e44-48f2-4270-bd14-df44df2f25e4" class="">용량이 큰 네트워크는 빠르게 과대적합이 시작되고 검증 손실도 매우 불안정합니다.</p></details></li></ul><ul id="34dd32bc-55d9-44bc-a9d6-a8e0294798fe" class="toggle"><li><details open=""><summary>모델 크기에 따른 훈련 손실 차이</summary><figure id="b7c79ae8-3ca0-453d-b386-3f761b177f43" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 4.png"><img style="width:420px" src="Chapter 4 Fundamentals of machine learning/Untitled 4.png"/></a></figure><p id="ac8d71f5-cf3d-4fe2-b67b-c9bb70d27715" class="">용량이 큰 네트워크는 훈련 손실이 매우 빠르게 0에 가까워집니다.(훈련 손실이 낮아집니다.)
+하지만 과대적합에 민감해져 훈련과 검증 손실 사이에 큰 차이가 발생합니다.</p></details></li></ul><h2 id="01c2e5f8-681f-4e4b-aecf-39c719875442" class="">4.2 가중치 규제 추가</h2><ul id="9b6e4bd9-2138-40d9-8cc9-0c17b3d40fb9" class="bulleted-list"><li>간단한 모델이 복잡한 모델보다 덜 과대적합될 가능성이 높습니다. (오캄의 면도날 이론처럼)</li></ul><ul id="49ccff3f-6fbd-4a68-a1f5-07db7c1b55d3" class="bulleted-list"><li>간단한 모델: 파라미터 값 분포의 엔트로피가 작은 모델</li></ul><ul id="62949db8-ab04-490d-8fc2-68463e49669c" class="toggle"><li><details open=""><summary>가중치 규제: 네트워크의 복잡도에 제한을 두어 가중치가 작은 값을 가지도록 강제하는 것. 가중치 값의 분포가 더 균일하게 됩니다.</summary><ul id="1c525e95-ac08-443b-9e41-ecfaf9371993" class="bulleted-list"><li>L1 규제: 가중치의 절댓값에 비례하는 비용이 추가됩니다. (가중치의 L1 노름)</li></ul><ul id="c4cb2ff7-3abe-4591-a581-b23f80582a73" class="bulleted-list"><li>L2 규제: 가중치의 제곱에 비례하는 비용이 추가됩니다. (가중치의 L2 노름). 신경망에서 가중치 감쇠라고도 부릅니다. 가중치는 수학적으로 L2 규제와 동일합니다. </li></ul></details></li></ul><ul id="913f3fde-e431-4471-ba3c-0d4c1ac0df66" class="toggle"><li><details open=""><summary>영화 리뷰 분류 네트워크에 L2 가중치 규제 추가하기</summary><pre id="e4ccbcc6-aa55-4fa4-bf7d-b0e5c4f32618" class="code"><code>from keras import regularizers
+model = models.Sequential()
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l2(0.001),
+                       activation=&#x27;relu&#x27;, input_shape=(10000,)))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l2(0.001),
+                       activation=&#x27;relu&#x27;))
+model.add(layers.Dense(1, activation=&#x27;sigmoid&#x27;))</code></pre><figure id="1f2278b3-683c-431e-aa3d-da09d0917583" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 5.png"><img style="width:336px" src="Chapter 4 Fundamentals of machine learning/Untitled 5.png"/></a></figure><p id="378ab5f0-1f4a-42d1-a886-aed9fc2f425f" class="">동일한 파라미터 수를 가지고 있더라도 L2 규제를 사용한 모델이 과대적합에 더 잘 견디고 있습니다.</p></details></li></ul><ul id="3249d308-a46d-4101-bba1-5d293a332915" class="toggle"><li><details open=""><summary>케라스에서 사용할 수 있는 가중치 규제</summary><pre id="dd63cf51-2c3c-410d-94be-785258b23818" class="code"><code>from keras import regularizers
+
+regularizers.l1(0.001) # L1 규제
+ 
+regularizers.l1_l2(l1=0.001, l2=0.001) # L1과 L2 규제 병행</code></pre></details></li></ul><h2 id="2d54447a-0504-46cd-a5ce-80d69edfb5ca" class="">4.3 드롭아웃 추가</h2><p id="90614613-53f5-42b9-a5bd-dbb61e98343c" class="">네트워크 층에 드롭아웃을 적용하면 훈련하는 동안 무작위로 층의 일부 출력 특성을 제외시킵니다. (0으로 만듭니다)
+드롭아웃 비율은 0이 될 특성의 비율입니다. 보통 0.2~0.5로 지정됩니다.
+테스트 단계에서는 어떤 유닛도 드롭아웃되지 않지만 대신 층의 출력을 드롭아웃 비율에 비례해 줄여 줍니다. (훈련할 때보다 더 많은 유닛이 활성화되기 때문)</p><p id="bb6607cb-0097-440b-a2fb-400b03bebd14" class="">층의 출력값에 노이즈를 추가해 중요하지 않은 우연한 패턴을 깨뜨리는게 핵심 아이디어입니다. 
+노이즈가 없다면 네트워크가 이 패턴을 기억하기 때문입니다.</p><ul id="a3f2502d-7f62-4e81-8408-adee888c1e0c" class="toggle"><li><details open=""><summary>IMDB 네트워크에 드롭아웃 적용하기(출력 바로 뒤에 추가합니다.)</summary><pre id="44fd3d05-95ad-4598-bfb3-ef61018c1dd9" class="code"><code>model = models.Sequential()
+model.add(layers.Dense(16, activation=&#x27;relu&#x27;, input_shape=(10000,)))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(16, activation=&#x27;relu&#x27;))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(1, activation=&#x27;sigmoid&#x27;))</code></pre><figure id="b4a37c7d-2bea-45c6-aa4a-aa8fb4bb6335" class="image"><a href="Chapter 4 Fundamentals of machine learning/Untitled 6.png"><img style="width:420px" src="Chapter 4 Fundamentals of machine learning/Untitled 6.png"/></a></figure><p id="3bf17120-5a8c-4d08-bdd8-07cfb0614279" class="">검증 손실이 기본 네트워크보다 향상되었습니다.</p></details></li></ul><h1 id="ca7f37ab-f0ac-4a2a-8fd4-33e0224cd017" class="">5. The universal workflow of machine learning</h1><h2 id="c5ec5149-633e-494f-bd3c-35e27a245bdb" class="">5.1 문제 정의와 데이터셋 수집(pass)</h2><h2 id="2a41a284-9a49-4a9b-b682-6be942058e53" class="">5.2 성공 지표 선택</h2><p id="2a1ec8cd-a2c7-40a7-9b39-717ffe1a0a0d" class="">클래스 분포가 균일한 분류 문제에서는 정확도와 ROC AUC가 일반적인 지표입니다.
+클래스 분포가 균일하지 않은 문제에서는 정밀도와 재현율을 사용할 수 있습니다.
+랭킹 문제나 다중 레이블 문제에는 평균 정밀도를 사용할 수 있습니다.</p><h2 id="09793ef5-72db-421e-bd75-27bba2313547" class="">5.3 평가 방법 선택</h2><ul id="a42d815b-c193-4c1d-8892-12a19e9ce667" class="bulleted-list"><li>홀드아웃 검증 세트 분리</li></ul><ul id="3a8104d6-cb82-4c17-9c15-30bb1663f376" class="bulleted-list"><li>K-겹 교차 검증</li></ul><ul id="e1082cdb-c6b1-4cfa-9f5a-20c6f85c2d48" class="bulleted-list"><li>반복 K-겹 교차 검증</li></ul><h2 id="ef1f4ec2-a853-4d91-b8fe-053d0e1a6010" class="">5.4 데이터 준비(pass)</h2><h2 id="e46d6807-4dbf-48bc-9bf7-fdae68af4653" class="">5.5 기본보다 나은 모델 훈련하기</h2><div id="7210efde-7ad8-45e3-9d58-c3a50ec542f8" class="collection-content"><h4 class="collection-title">모델에 맞는 마지막 층의 활성화 함수와 손실 함수 선택</h4><table class="collection-content"><thead><tr><th>문제 유형</th><th>마지막 층의 활성화 함수</th><th>손실 함수</th></tr></thead><tbody><tr id="418aa340-f6d4-4b49-91b5-919df31a24c6"><td class="cell-title"><a href="https://www.notion.so/418aa340f6d44b4991b5919df31a24c6">이진 분류</a></td><td class="cell-MM1Y">시그모이드</td><td class="cell-N&amp;hD">binary_crossentropy</td></tr><tr id="fb4a4344-f9e1-41c2-ad8c-3d20b445d228"><td class="cell-title"><a href="https://www.notion.so/fb4a4344f9e141c2ad8c3d20b445d228">단일 레이블 다중 분류</a></td><td class="cell-MM1Y">소프트맥스</td><td class="cell-N&amp;hD">categorical_crossentropy</td></tr><tr id="198ea043-0898-4257-9e9b-22cd75dc443b"><td class="cell-title"><a href="https://www.notion.so/198ea043089842579e9b22cd75dc443b">다중 레이블 다중 분류</a></td><td class="cell-MM1Y">시그모이드</td><td class="cell-N&amp;hD"> binary_crossentropy</td></tr><tr id="f61bd8ec-e2cc-4dfd-9c00-0d7047612ecb"><td class="cell-title"><a href="https://www.notion.so/f61bd8ece2cc4dfd9c000d7047612ecb">임의 값에 대한 회귀</a></td><td class="cell-MM1Y">없음</td><td class="cell-N&amp;hD">mse</td></tr><tr id="4d909f6a-c73b-47a3-b40d-a841d97e06b6"><td class="cell-title"><a href="https://www.notion.so/0-1-4d909f6ac73b47a3b40da841d97e06b6">0과 1 사이 값에 대한 회귀</a></td><td class="cell-MM1Y">시그모이드</td><td class="cell-N&amp;hD">mse 또는 binary_crossentropy</td></tr></tbody></table></div><h2 id="f9775c3b-45af-4165-a052-314fb85b9f70" class="">5.6 몸집 키우기: 과대적합 모델 구축(pass)</h2><h2 id="10b842fa-df4a-42bd-9474-7d30e7b7b9f4" class="">5.7 모델 규제와 하이퍼파라미터 튜닝(pass)</h2><p id="973ff5c1-b55f-4d29-8e97-86c8c729b409" class="">
+</p></div></article></body></html>
