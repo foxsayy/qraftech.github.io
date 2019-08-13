@@ -1,11 +1,11 @@
 # Site
-name: "Q Tech"
-title: "Q Tech Blog"
-description: "ㅋㄿㅌ의 블로그입니다."
+name: "Qraft Tech Blog"
+title: "Qraft Tech Blog"
+description: "Qraft technologies sample blog"
 logo: 'assets/images/logo.jpg'
 favicon: 'assets/images/favicon.jpg'
-url: "https://qraftech.github.io"
-baseurl: ""
+url: "https://qraftech.github.io/example1"
+baseurl: "example1"
 # google_analytics: 'UA-145461596-1'
 # disqus: 'demowebsite'
 # mailchimp-list: 
