@@ -4,8 +4,8 @@ title: "Qraft Tech Blog"
 description: "Qraft technologies sample blog"
 logo: 'assets/images/logo.jpg'
 favicon: 'assets/images/favicon.jpg'
-url: "https://qraftech.github.io/example1"
-baseurl: "example1"
+url: "https://qraftech.github.io"
+baseurl: ""
 # google_analytics: 'UA-145461596-1'
 # disqus: 'demowebsite'
 # mailchimp-list: 
